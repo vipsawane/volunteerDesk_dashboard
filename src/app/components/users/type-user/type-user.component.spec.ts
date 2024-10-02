@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeniorComponent } from './senior.component';
+import { TypeUserComponent } from './type-user.component';
 
-describe('SeniorComponent', () => {
-  let component: SeniorComponent;
-  let fixture: ComponentFixture<SeniorComponent>;
+describe('TypeUserComponent', () => {
+  let component: TypeUserComponent;
+  let fixture: ComponentFixture<TypeUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SeniorComponent]
+      imports: [TypeUserComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SeniorComponent);
+    fixture = TestBed.createComponent(TypeUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
