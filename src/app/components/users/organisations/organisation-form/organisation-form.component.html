@@ -1,0 +1,77 @@
+<div class="organisation-form-container">
+  <form [formGroup]="organisationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Numéro d'Identification</mat-label>
+      <input matInput formControlName="numeroIdentification" placeholder="Entrez le numéro d'identification">
+      <mat-error *ngIf="organisationForm.get('numeroIdentification')?.invalid && organisationForm.get('numeroIdentification')?.touched">
+        Ce champ est obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Mot de Passe</mat-label>
+      <input matInput type="password" formControlName="motDePasse" placeholder="Entrez le mot de passe">
+      <mat-error *ngIf="organisationForm.get('motDePasse')?.invalid && organisationForm.get('motDePasse')?.touched">
+        Le mot de passe doit contenir au moins 8 caractères
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Raison Sociale</mat-label>
+      <input matInput formControlName="raisonSocial" placeholder="Entrez la raison sociale">
+      <mat-error *ngIf="organisationForm.get('raisonSocial')?.invalid && organisationForm.get('raisonSocial')?.touched">
+        Ce champ est obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Entrez la description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="emailOrganisation" placeholder="Entrez l'email">
+      <mat-error *ngIf="organisationForm.get('emailOrganisation')?.invalid && organisationForm.get('emailOrganisation')?.touched">
+        Entrez un email valide
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contact</mat-label>
+      <input matInput formControlName="contact" placeholder="Entrez le contact">
+      <mat-error *ngIf="organisationForm.get('contact')?.invalid && organisationForm.get('contact')?.touched">
+        Ce champ est obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="adresse" placeholder="Entrez l'adresse">
+      <mat-error *ngIf="organisationForm.get('adresse')?.invalid && organisationForm.get('adresse')?.touched">
+        Ce champ est obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Siège</mat-label>
+      <input matInput formControlName="siege" placeholder="Entrez le siège">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Domaine d'Activité</mat-label>
+      <input matInput formControlName="domaineActivite" placeholder="Entrez le domaine d'activité">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Logo</mat-label>
+      <input type="file" (change)="onFileSelected($event)">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="organisationForm.invalid">Ajouter Organisation</button>
+  </form>
+
+  <div *ngIf="submitted" class="success-message">
+    Organisation ajoutée avec succès !
+  </div>
+</div>

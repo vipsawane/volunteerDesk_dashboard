@@ -1,22 +1,53 @@
-
 <div class="sidebar-wrapper">
-    <div class="logo">
-      <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-        <div class="logo-image-small">
-          <img src="assets/img/angular2-logo.png">
+        <div class="logo">
+              <div class="logo-image-small">
+                <img src="/assets/img/logo.svg">
+              </div>
         </div>
+
+        <ul class="nav">
+
+          <a *ngIf="isNotJeune()" href="/dashboard" class="" [ngClass]="{'active': isActive('/dashboard')}">
+            <i class="fa-solid fa-house"></i><p>Accueil</p>
+          </a>
+
+         
+        <!-- "Users" accessible uniquement pour Admin -->
+        <a *ngIf="hastypeUser('Admin')" href="/utilisateurs" class="" [ngClass]="{'active': isActive('/utilisateurs')}">
+          <i class="fa-solid fa-users"></i><p>Utilisateurs</p>
+        </a>
+   
+  
+      <!-- Autres liens accessibles à tous sauf aux "Jeunes" -->
+      <a *ngIf="isNotJeune()" href="/evenement" class="" [ngClass]="{'active': isActive('/evenement')}">
+        <i class="fa-solid fa-book"></i><p>Evenements</p>
       </a>
-      <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-        Volunteer Desk
+
+      <!-- Autres liens accessibles à tous sauf aux "Jeunes" -->
+      <a *ngIf="isNotJeune()" href="/detailsevenement" class="" [ngClass]="{'active': isActive('/detailsevenement')}">
+        <i class="fa-solid fa-clipboard"></i><p>Details Evenements</p>
       </a>
-    </div>
-      <ul class="nav">
-          <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
-              <!-- <a [routerLink]="[menuItem.path]">
-                  <i class="nc-icon {{menuItem.icon}}"></i>
-                  <p>{{menuItem.title}}</p>
-              </a> -->
-          </li>
-      </ul>
+
+      <a *ngIf="isNotJeune()" href="/detailsevenement" class="" [ngClass]="{'active': isActive('/ressource')}">
+        <i class="fa-solid fa-book-open"></i><p>Ressources</p>
+      </a>
+
+
+
+      <a *ngIf="isNotJeune()" href="/calendrier" class="" [ngClass]="{'active': isActive('/calendrier')}">
+        <i class="fa-regular fa-calendar-days"></i><p>Calendrier</p>
+      </a>
+      
+      <hr style="padding-top: 10rem;">
+  
+      <!-- Liens accessibles à tous sauf aux "Jeunes" -->
+      <a *ngIf="isNotJeune()" href="/compte" class="" [ngClass]="{'active': isActive('/compte')}">
+        <i class="fa-solid fa-user"></i><p>Compte</p>
+      </a>
+  
+      <a *ngIf="isNotJeune()" href="/parametres" class="" [ngClass]="{'active': isActive('/parametres')}">
+        <i class="fa-solid fa-gear"></i><p>Parametres</p>
+      </a>
+    </ul>
   </div>
   

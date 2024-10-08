@@ -1,0 +1,69 @@
+.organisation-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    mat-form-field {
+      width: 100%;
+    }
+  
+    button[type='submit'] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border-radius: 4px;
+  
+      &:hover {
+        background-color: #1565c0;
+      }
+  
+      &:disabled {
+        background-color: #e0e0e0;
+        color: #9e9e9e;
+        cursor: not-allowed;
+      }
+    }
+  
+    .success-message {
+      text-align: center;
+      color: #388e3c;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  
+    // Responsive design
+    @media (max-width: 768px) {
+      padding: 15px;
+  
+      button[type='submit'] {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      padding: 10px;
+  
+      button[type='submit'] {
+        padding: 8px;
+        font-size: 12px;
+      }
+    }
+  }
+  

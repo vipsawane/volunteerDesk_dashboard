@@ -1,113 +1,114 @@
+html, body {
+  height: 70%;
+  
+
+  margin: 1rem;
+}
+
+/*
+Section pour card
+*/
+
+.container {
+  width: 97%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+  flex-wrap: wrap; 
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  width: 250px;  
+  height: 150px; 
+  border-radius: 10px; 
+  padding: 10px;
+  background-color: #fff; /* Fond blanc */
+  color: #000; /* Texte en noir */
+  box-shadow: 0 1rem 3rel rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Légère ombre pour un effet de carte */
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); /* Ombre plus marquée au survol */
+  }
+}
+
+.top-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
+}
+
+.monicone {
+  font-size: 40px;
+  color: #000; /* Changer l'icône en noir pour correspondre au texte */
+  margin-right: 20px; 
+}
+
+.item span {
+  font-size: 26px;
+  font-weight: bold;
+  color: #000; /* Texte en noir */
+}
+
+.statistique {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000; /* Texte en noir */
+}
+
+
+/* Section pour le diagramme en bande */
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-  
-    .col-lg-3,
-    .col-md-6,
-    .col-sm-6 {
-      padding-right: 15px;
-      padding-left: 15px;
-      margin-bottom: 30px;
-  
-      .card {
-        border-radius: 0.75rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        transition: all 0.3s ease-in-out;
-        background-color: #fff;
-  
-        &:hover {
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px -15px;
+
+  .col-md-12 {
+    flex: 1;
+    padding: 15px;
+
+    .card {
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: all 0.3s ease-in-out;
+      background-color: #fff;
+
+      .card-header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+
+        h5 {
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: #333;
         }
-  
-        .card-body {
-          padding: 20px;
-          .row {
-            display: flex;
-            justify-content: space-between;
-          }
-        }
-  
-        .icon-big {
-          font-size: 3rem;
-          line-height: 1;
-          margin: auto 0;
-        }
-  
-        .text-warning {
-          color: #ffcc00;
-        }
-  
-        .text-success {
-          color: #28a745;
-        }
-  
-        .text-danger {
-          color: #dc3545;
-        }
-  
-        .text-primary {
-          color: #007bff;
-        }
-  
-        .numbers {
-          p {
-            margin: 0;
-            font-size: 1rem;
-  
-            &.card-category {
-              font-weight: 600;
-              font-size: 0.875rem;
-              color: #999;
-              margin-bottom: 10px;
-            }
-  
-            &.card-title {
-              font-weight: bold;
-              font-size: 1.25rem;
-              color: #333;
-            }
-          }
+
+        .card-category {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #999;
+          margin-bottom: 10px;
         }
       }
-    }
-  
-    .col-md-12,
-    .col-md-4,
-    .col-md-8 {
-      padding-right: 15px;
-      padding-left: 15px;
-      margin-bottom: 30px;
-  
-      .card {
-        border-radius: 0.75rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        background-color: #fff;
-  
-        .card-header {
-          padding: 15px 20px;
-          border-bottom: 1px solid #eee;
-          h5 {
-            margin-bottom: 0;
-            font-size: 1.25rem;
-            font-weight: bold;
-          }
-          p {
-            margin: 0;
-            color: #999;
-            font-size: 0.875rem;
-          }
-        }
-  
-        .card-body {
-          padding: 20px;
-          canvas {
-            width: 100%;
-            height: auto;
-          }
+
+      .card-body {
+        padding: 20px;
+        
+        canvas {
+          width: 100% !important;
+          height: 100% !important;
         }
       }
     }
   }
-  
+}

@@ -1,3 +1,4 @@
-export interface Notification{
-    
+export interface Notification {
+    idNotification:      number;
+    contenuNotification: string;
 }
