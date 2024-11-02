@@ -1,0 +1,81 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #343a40; /* Dark background */
+    // padding: 10px 20px;
+  
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      align-items: center;
+
+      h6{
+      justify-content: flex-end;
+
+      }
+  
+  
+      &:hover {
+        color: #ddd;
+      }
+    }
+  
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1);
+  
+      .navbar-toggler-icon {
+        color: #fff;
+      }
+    }
+  
+    .navbar-collapse {
+      justify-content: flex-end;
+  
+      .navbar-nav {
+        .nav-link {
+          font-size: 1rem;
+          color: #fff;
+          padding: 0.5rem 1rem;
+          transition: color 0.3s ease-in-out;
+  
+          i {
+            margin-right: 5px;
+          }
+  
+          &:hover {
+            color: #ddd;
+          }
+        }
+  
+        .dropdown-menu {
+          background-color: #495057; /* Dropdown background */
+          border: none;
+  
+          .dropdown-item {
+            color: #fff;
+            transition: background-color 0.3s ease-in-out;
+  
+            &:hover {
+              background-color: #6c757d; /* On hover */
+            }
+          }
+  
+          .dropdown-divider {
+            border-top: 1px solid #6c757d;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .navbar-nav {
+      .nav-item {
+        text-align: center;
+        margin: 10px 0;
+      }
+    }
+  }
+  

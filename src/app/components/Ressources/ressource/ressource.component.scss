@@ -1,9 +1,25 @@
-.example-card {
-    max-width: 400px;
+// .ressources{
+//   display: flex;
+//   align-content: center;
+//   flex-wrap: wrap;
+// }
+
+// .ressource{
+//   border: solid 1px ;
+// }
+
+.list-group-item{
+  margin: 0 10px 0 10px ;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Place le bouton à droite */
+    margin-right: 10px;
   }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
+
+  .button-container text-end mb-3{
+    display: flex;
+    justify-content: space-between;
   }
   

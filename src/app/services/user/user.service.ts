@@ -8,28 +8,36 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl : any = environment.apiURL+"user";
+  baseUrl : string = environment.apiURL+"/user";
     constructor(private http: HttpClient) {}
 
-  getAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl);
+    connexion(email: string, password: string): Observable<any> {
+    const body = { email, password };
+    console.log(`${this.baseUrl}/connexion`)
+    // console.log(`${this.baseUrl}/connexion?email=${email}&password=${password}`)
+      return this.http.get<any>(`${this.baseUrl}/connexion?email=${email}&password=${password}`);
+    }
+    
+
+  getAllUser(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/getAllUser`);
   }
 
-  get(id: any): Observable<User> {
+  getUserById(id: any): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
-  create(data: any): Observable<any> {
-    return this.http.post(this.baseUrl+"/addUser", data);
+  // create(data: any): Observable<any> {
+  //   return this.http.post(`${this.baseUrl}/createUser`, data);
     
-  }
+  // }
 
-  createUser(user: User, photoUser:File,photoCarteIdentite: File): Observable<any>{
+  createUser(user: any, photoUser:File,photoCarteIdentite: File): Observable<any>{
     const formData = new FormData();
     formData.append('user', JSON.stringify(user));
-    formData.append('photoUser', photoUser);
-    formData.append('photoCarteIdentite', photoCarteIdentite);
-    return this.http.post<any>(this.baseUrl +'/create', formData);
+    formData.append('imageFile1', photoUser);
+    formData.append('imageFile', photoCarteIdentite);
+    return this.http.post<any>(`${this.baseUrl}/createUser`, formData);
   }
 
   updateUser(user: User, image:File, id : number): Observable<any> {
@@ -37,27 +45,32 @@ export class UserService {
     formData.append('user', JSON.stringify(user));
     formData.append('photoUser', image);
     formData.append('photoCarteIdentite', image);
-    return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+    return this.http.put<any>(`${this.baseUrl}/updateUser/${id}`, formData);
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/currentUser`); // Endpoint pour obtenir l'utilisateur courant
   }
 
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+  deleteUser(id: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete/${id}`);
+
   }
 
   // deleteAll(): Observable<any> {
   //   return this.http.delete(this.baseUrl);
   // }
 
-  findByNom(nom: any): Observable<User[]> {
+  getUserUserByNom(nom: any): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}?nom=${nom}`);
   }
 
-  findByPrenom(prenomUser: any): Observable<User[]> {
+  getUserByPrenom(prenomUser: any): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}?prenomUser=${prenomUser}`);
   }
 
-  findByRole(role: any): Observable<User[]> {
+  getUserByRole(role: any): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}?role=${role}`);
   }
 }

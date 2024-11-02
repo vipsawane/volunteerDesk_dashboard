@@ -12,34 +12,34 @@ export class TypeOrganisationService {
   baseUrl : any = environment.apiURL+"/typeOrganisation";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<TypeOrganisation[]> {
-  return this.http.get<TypeOrganisation[]>(this.baseUrl);
+getAllTypeOrganisation(): Observable<TypeOrganisation[]> {
+  return this.http.get<TypeOrganisation[]>(`${this.baseUrl}/getAllTypeOrganisation`);
 }
 
-get(id: any): Observable<TypeOrganisation> {
-  return this.http.get<TypeOrganisation>(`${this.baseUrl}/${id}`);
+getTypeOrganisationById(id: any): Observable<TypeOrganisation> {
+  return this.http.get<TypeOrganisation>(`${this.baseUrl}/getAllTypeOrganisationById/${id}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addTypeOrganisation", data);
+// create(data: any): Observable<any> {
+//   return this.http.post(this.baseUrl+"/addTypeOrganisation", data);
   
-}
+// }
 
-createUSer(typeOrganisation: TypeOrganisation): Observable<any>{
+createTypeOrganisation(typeOrganisation: TypeOrganisation): Observable<any>{
   const formData = new FormData();
   formData.append('typeOrganisation', JSON.stringify(typeOrganisation));
-  return this.http.post<any>(this.baseUrl +'/create', formData);
+  return this.http.post<any>(`${this.baseUrl}/createTypeOrganisation`, formData);
 }
 
-updateUser(typeOrganisation: TypeOrganisation, id : number): Observable<any> {
+updateTypeOrganisation(typeOrganisation: TypeOrganisation, id : number): Observable<any> {
   const formData = new FormData();
   formData.append('typeOrganisation', JSON.stringify(typeOrganisation));
-  return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+  return this.http.put<any>(`${this.baseUrl}/updateTypeOrganisation/${id}`, formData);
 }
 
 
-delete(id: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteTypeOrganisation(id: number): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteTypeOrganisation}/${id}`);
 }
 
 // deleteAll(): Observable<any> {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Organisation } from '../../models/organisation';
-import { TypeOrganisation } from '../../models/typeOrganisation'; // Chemin correct pour TypeOrganisation
+import { TypeOrganisation } from '../../models/typeOrganisation';
 
 
 
@@ -12,46 +12,46 @@ import { TypeOrganisation } from '../../models/typeOrganisation'; // Chemin corr
 })
 export class OrganisationService {
 
-  baseUrl : any = environment.apiURL;
+  baseUrl : any = environment.apiURL+"/organisation";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<Organisation[]> {
-  return this.http.get<Organisation[]>(this.baseUrl);
+getAllOrganisation(): Observable<Organisation[]> {
+  return this.http.get<Organisation[]>(`${this.baseUrl}/getAllOrganisation`);
 }
 
-get(id: any): Observable<Organisation> {
-  return this.http.get<Organisation>(`${this.baseUrl+"/organisation"}/${id}`);
+getOrganisationById(id: any): Observable<Organisation> {
+  return this.http.get<Organisation>(`${this.baseUrl}/getAllOrganisationById}/${id}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addOrganisation", data);
+// create(data: any): Observable<any> {
+//   return this.http.post(`${this.baseUrl}/create`, data);
   
-}
+// }
 
 createOrganisation(organisation: Organisation, logo:File): Observable<any>{
   const formData = new FormData();
   formData.append('organisation', JSON.stringify(organisation));
   formData.append('logo', logo);
-  return this.http.post<any>(this.baseUrl +'/create', formData);
+  return this.http.post<any>(`${this.baseUrl}/createOrganisation`, formData);
 }
 
 updateOrganisation(organisation: Organisation, logo:File, id : any): Observable<any> {
   const formData = new FormData();
   formData.append('organisation', JSON.stringify(organisation));
   formData.append('logo', logo);
-  return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+  return this.http.put<any>(`${this.baseUrl}/updateOrganisation/${id}`, formData);
 }
 
 
-delete(id: any): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteOrganisation(id: any): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteOrganisation/${id}`);
 }
 
-deleteAll(): Observable<any> {
-  return this.http.delete(this.baseUrl);
-}
+// deleteAll(): Observable<any> {
+//   return this.http.delete(this.baseUrl);
+// }
 
-findByRaisonSocial(raisonSocial: any): Observable<Organisation[]> {
+findOrganisaByRaisonSocial(raisonSocial: any): Observable<Organisation[]> {
   return this.http.get<Organisation[]>(`${this.baseUrl}?raisonSocial=${raisonSocial}`);
 }
 

@@ -1,84 +1,69 @@
-import { UserService } from './../../../services/user/user.service';
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
 import { User } from '../../../models/user';
-
-import { ReactiveFormsModule } from '@angular/forms'; // Ajoutez cette ligne
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss'],
   imports: [
-    CommonModule,
-    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     MatFormFieldModule,
-    MatButtonModule,
     ReactiveFormsModule
-  ]
+  ],
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
   userForm: FormGroup;
-  submitted = false;
-  photoUser: File | null = null;
-  photoCarteIdentite: File | null = null;
+  @Output() userAdded = new EventEmitter<User>();
 
-  
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService
-  ) {
-    // Initialisation du formulaire d'utilisateur avec toutes les propriétés du modèle User
-    this.userForm = this.formBuilder.group({
+  constructor(private fb: FormBuilder, private userService: UserService) {
+    this.userForm = this.fb.group({
       nomUser: ['', Validators.required],
       prenomUser: ['', Validators.required],
-      description: [''],
-      motDePasse: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
-      dateNaissance: ['', Validators.required],
-      numCarteIdentite: ['', Validators.required],
-      competences: [''],
-      anneeExperience: [0, Validators.min(0)],
       role: ['', Validators.required],
+      competences: [''],
+      motDePasse: ['', [Validators.required, Validators.minLength(8)]],
+      description: [''],
+      dateNaissance: [''],
+      numCarteIdentite: [''],
+      anneeExperience: [null],
       photoUser: [null],
-      photoCarteIdentite: [null]
+      photoCarteIdentite: [null],
     });
   }
 
-  // Gestion de la sélection de fichiers (photoUser et photoCarteIdentite)
-  onFileSelected(event: any, type: 'photoUser' | 'photoCarteIdentite') {
-    const file: File = event.target.files[0];
-    if (file) {
-      if (type === 'photoUser') {
-        this.photoUser = file;
-      } else if (type === 'photoCarteIdentite') {
-        this.photoCarteIdentite = file;
-      }
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      const user: User = this.userForm.value;
+      const photoUser = this.userForm.get('photoUser')?.value;
+      const photoCarteIdentite = this.userForm.get('photoCarteIdentite')?.value;
+
+      this.userService.createUser(user, photoUser, photoCarteIdentite).subscribe(
+        (response: any) => {
+          this.userAdded.emit(response); // Émet l'utilisateur ajouté
+          this.userForm.reset(); // Réinitialise le formulaire
+        },
+        (error: any) => {
+          console.error("Erreur lors de l'ajout de l'utilisateur", error);
+        }
+      );
     }
   }
 
-  // Soumission du formulaire
-  onSubmit() {
-    if (this.userForm.valid) {
-      const userData: User = this.userForm.value;  // Récupère les données du formulaire
-
-      // Appel du service pour ajouter un utilisateur avec photo et carte d'identité
-      this.userService.createUser(userData, this.photoUser!, this.photoCarteIdentite!)
-        .subscribe({
-          next: (response: any) => {
-            console.log('Utilisateur créé avec succès', response);
-            this.submitted = true;
-          },
-          error: (error: any) => {
-            console.error('Erreur lors de la création de l\'utilisateur', error);
-          }
-        });
-    }
+  onFileSelected(event: any, field: string): void {
+    const file = event.target.files[0];
+    this.userForm.patchValue({ [field]: file });
   }
 }

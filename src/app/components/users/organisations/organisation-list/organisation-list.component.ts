@@ -46,7 +46,7 @@ export class OrganisationListComponent implements AfterViewInit {
   constructor(private organisationService: OrganisationService) {}
 
   ngOnInit() {
-    this.organisationService.getAll().subscribe(data => {
+    this.organisationService.getAllOrganisation().subscribe(data => {
       this.dataSource.data = data;
     });
   }

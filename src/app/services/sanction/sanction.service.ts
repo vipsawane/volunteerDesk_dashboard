@@ -14,31 +14,31 @@ export class SanctionService {
   baseUrl : any = environment.apiURL+"/sanction";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<Sanction[]> {
-  return this.http.get<Sanction[]>(this.baseUrl);
+getAllSanction(): Observable<Sanction[]> {
+  return this.http.get<Sanction[]>(`${this.baseUrl}/getAllSanction`);
 }
 
-get(id: any): Observable<Sanction> {
-  return this.http.get<Sanction>(`${this.baseUrl}/${id}`);
+getSanctionById(id: any): Observable<Sanction> {
+  return this.http.get<Sanction>(`${this.baseUrl}/getAllSanctionById/${id}`);
 }
 
 findByLibelleSanction(libelleSanction: any): Observable<Sanction[]> {
   return this.http.get<Sanction[]>(`${this.baseUrl}?libelleSanction=${libelleSanction}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addSanction", data);
+createSanction(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/createSanction`, data);
   
 }
 
 
-update(id: any, data: any): Observable<any> {
-  return this.http.put(`${this.baseUrl+'/update'}/${id}`, data);
+updateSanction(id: any, data: any): Observable<any> {
+  return this.http.put(`${this.baseUrl}/updateSanction/${id}`, data);
 }
 
 
-delete(id: any): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteSanction(id: any): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteSanction/${id}`);
 }
 
 // deleteAll(): Observable<any> {

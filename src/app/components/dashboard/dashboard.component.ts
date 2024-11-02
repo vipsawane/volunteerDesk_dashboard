@@ -4,8 +4,12 @@ import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 @Component({
-    selector: 'dashboard-cmp',
-    templateUrl: 'dashboard.component.html'
+    selector: 'app-dashboard',
+    standalone: true,
+        templateUrl: 'dashboard.component.html',
+        // styleUrls: ['./evenement.component.scss'],
+        imports:[],
+  
 })
 export class DashboardComponent implements OnInit {
 

@@ -8,7 +8,7 @@
         <ul class="nav">
 
           <a *ngIf="isNotJeune()" href="/dashboard" class="" [ngClass]="{'active': isActive('/dashboard')}">
-            <i class="fa-solid fa-house"></i><p>Accueil</p>
+            <i class="fa-solid fa-house"></i><p>Dashboard</p>
           </a>
 
          
@@ -28,7 +28,7 @@
         <i class="fa-solid fa-clipboard"></i><p>Details Evenements</p>
       </a>
 
-      <a *ngIf="isNotJeune()" href="/detailsevenement" class="" [ngClass]="{'active': isActive('/ressource')}">
+      <a *ngIf="isNotJeune()" href="/ressource" class="" [ngClass]="{'active': isActive('/ressource')}">
         <i class="fa-solid fa-book-open"></i><p>Ressources</p>
       </a>
 
@@ -38,7 +38,7 @@
         <i class="fa-regular fa-calendar-days"></i><p>Calendrier</p>
       </a>
       
-      <hr style="padding-top: 10rem;">
+      <hr>
   
       <!-- Liens accessibles à tous sauf aux "Jeunes" -->
       <a *ngIf="isNotJeune()" href="/compte" class="" [ngClass]="{'active': isActive('/compte')}">

@@ -12,34 +12,34 @@ export class RoleService {
   baseUrl : any = environment.apiURL+"/role";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<Role[]> {
-  return this.http.get<Role[]>(this.baseUrl);
+getAllRole(): Observable<Role[]> {
+  return this.http.get<Role[]>(`${this.baseUrl}/getAllRole`);
 }
 
-get(id: any): Observable<Role> {
-  return this.http.get<Role>(`${this.baseUrl}/${id}`);
+getRoleById(id: any): Observable<Role> {
+  return this.http.get<Role>(`${this.baseUrl}/getAllRoleById/${id}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addRole", data);
+// create(data: any): Observable<any> {
+//   return this.http.post(this.baseUrl+"/addRole", data);
   
-}
+// }
 
-createUSer(role: Role): Observable<any>{
+createRole(role: Role): Observable<any>{
   const formData = new FormData();
   formData.append('role', JSON.stringify(role));
-  return this.http.post<any>(this.baseUrl +'/create', formData);
+  return this.http.post<any>(`${this.baseUrl}/createRole`, formData);
 }
 
-updateUser(role: Role, id : number): Observable<any> {
+updateRole(role: Role, id : number): Observable<any> {
   const formData = new FormData();
   formData.append('role', JSON.stringify(role));
-  return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+  return this.http.put<any>(`${this.baseUrl}/updateRole/${id}`, formData);
 }
 
 
-delete(id: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteRole(id: number): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteRole/${id}`);
 }
 
 // deleteAll(): Observable<any> {

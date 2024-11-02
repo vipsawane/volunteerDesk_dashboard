@@ -9,37 +9,37 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommentaireService {
 
-  baseUrl : any = environment.apiURL+"/candidature";
+  baseUrl : any = environment.apiURL+"/commentaire";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<Commentaire[]> {
-  return this.http.get<Commentaire[]>(this.baseUrl);
+getAllCommentaire(): Observable<Commentaire[]> {
+  return this.http.get<Commentaire[]>(`${this.baseUrl}/getAllCommentaire`);
 }
 
-get(id: any): Observable<Commentaire> {
-  return this.http.get<Commentaire>(`${this.baseUrl}/${id}`);
+getCommentaireById(id: any): Observable<Commentaire> {
+  return this.http.get<Commentaire>(`${this.baseUrl}/getAllCommentaireById/${id}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addCommentaire", data);
+// create(data: any): Observable<any> {
+//   return this.http.post(this.baseUrl+"/addCommentaire", data);
   
-}
+// }
 
 createCommentaire(commentaire: Commentaire): Observable<any>{
   const formData = new FormData();
   formData.append('commentaire', JSON.stringify(commentaire));
-  return this.http.post<any>(this.baseUrl +'/create', formData);
+  return this.http.post<any>(`${this.baseUrl}/createCommentaire`, formData);
 }
 
 updateCommentaire(commentaire: Commentaire, id : number): Observable<any> {
   const formData = new FormData();
   formData.append('commentaire', JSON.stringify(commentaire));
-  return this.http.put<any>(this.baseUrl +'/commentaire/' + id, formData);
+  return this.http.put<any>(`${this.baseUrl}/updateCommentaire/${id}`, formData);
 }
 
 
-delete(id: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteCommentaire(id: number): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteCommentaire/${id}`);
 }
 
 // deleteAll(): Observable<any> {

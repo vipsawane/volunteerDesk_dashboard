@@ -1,0 +1,60 @@
+// /* Wrapper global du layout avec sidebar et contenu */
+.layout-wrapper {
+    // display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+// /* Sidebar */
+.app-sidebar {
+    width: 250px; /* Largeur du sidebar */
+    position: fixed; /* Fixe le sidebar à gauche */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Hauteur totale de l'écran */
+    background-color: #fff;
+    border-right: 0.15rem solid black;
+    z-index: 1000;
+}
+
+// /* Contenu principal */
+.main-content {
+    margin-left: 250px; /* Décalage pour prendre en compte la largeur du sidebar */
+    // padding: 20px; /* Espacement interne pour le contenu */
+    margin-top: 20px;
+    width: calc(100% - 250px); /* Occupe l'espace restant */
+    min-height: calc(100vh - 60px); /* Ajustez la hauteur en fonction de la navbar */
+    background-color: #f8f9fa; /* Couleur de fond pour distinguer du sidebar */
+    display: flex;
+    flex-direction: column; /* Permet d'organiser la navbar et le contenu verticalement */
+}
+
+// /* Navbar */
+// // .navbar {
+// //     height: 10rem; /* Hauteur de la navbar */
+// //     display: flex;
+// //     align-items: center; /* Centre le contenu verticalement */
+// //     justify-content: space-between; /* Espace entre les éléments de la navbar */
+// //     padding: 0 20px; /* Espacement interne */
+// //     background-color: #007bff; /* Couleur de fond de la navbar */
+// //     color: #fff; /* Couleur du texte de la navbar */
+// // }
+
+
+
+.layout-wrapper{
+    display: flex;
+    // align-items:center;
+    justify-content:space-between;
+    height: 100%;
+    width: 100%;
+    //background-color: green;    
+
+    .main-content{
+        width: 80%;
+        height:95%;
+        // display: flex;
+        // align-items:center;
+        // background-color:gray;
+    }
+}

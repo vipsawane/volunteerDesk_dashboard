@@ -13,41 +13,41 @@ export class MessageService {
   baseUrl : any = environment.apiURL+"/message";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<Message[]> {
-  return this.http.get<Message[]>(this.baseUrl);
+getAllMessage(): Observable<Message[]> {
+  return this.http.get<Message[]>(`${this.baseUrl}/getAllMessage`);
 }
 
-get(id: any): Observable<Message> {
-  return this.http.get<Message>(`${this.baseUrl}/${id}`);
+getMessageById(id: any): Observable<Message> {
+  return this.http.get<Message>(`${this.baseUrl}/getAllMessageById/${id}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addMessage", data);
+// create(data: any): Observable<any> {
+//   return this.http.post(this.baseUrl+"/addMessage", data);
   
-}
+// }
 
 createMessage(message: Message, imageMessage:File): Observable<any>{
   const formData = new FormData();
   formData.append('message', JSON.stringify(message));
   formData.append('imageMessage', imageMessage);
-  return this.http.post<any>(this.baseUrl +'/create', formData);
+  return this.http.post<any>(`${this.baseUrl}/createMessage}`, formData);
 }
 
-updateRessource(message: Message, imageMessage:File, id : any): Observable<any> {
+updateMessage(message: Message, imageMessage:File, id : any): Observable<any> {
   const formData = new FormData();
   formData.append('message', JSON.stringify(message));
   formData.append('imageMessage', imageMessage);
-  return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+  return this.http.put<any>(`${this.baseUrl}/updateMessage/${id}`, formData);
 }
 
 
-delete(id: any): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteMessage(id: any): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteMessage/${id}`);
 }
 
-// deleteAll(): Observable<any> {
-//   return this.http.delete(this.baseUrl);
-// }
+deleteAllMessage(): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteAllMessage`);
+}
 
 findByContenuMessage(contenuMessage: any): Observable<Message[]> {
   return this.http.get<Message[]>(`${this.baseUrl}?contenuMessage=${contenuMessage}`);

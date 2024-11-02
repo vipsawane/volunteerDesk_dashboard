@@ -12,34 +12,34 @@ export class StatutMessageService {
   baseUrl : any = environment.apiURL+"/statutMessage";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<StatutMessage[]> {
-  return this.http.get<StatutMessage[]>(this.baseUrl);
+  getAllStatutMessage(): Observable<StatutMessage[]> {
+  return this.http.get<StatutMessage[]>(`${this.baseUrl}/getAllStatutMessage`);
 }
 
-get(id: any): Observable<StatutMessage> {
-  return this.http.get<StatutMessage>(`${this.baseUrl}/${id}`);
+getStatutMessageById(id: any): Observable<StatutMessage> {
+  return this.http.get<StatutMessage>(`${this.baseUrl}/getAllStatutMessageById/${id}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addStatutMessage", data);
+// create(data: any): Observable<any> {
+//   return this.http.post(this.baseUrl+"/addStatutMessage", data);
   
-}
+// }
 
-createUSer(statutMessage: StatutMessage): Observable<any>{
+createStatutMessage(statutMessage: StatutMessage): Observable<any>{
   const formData = new FormData();
   formData.append('statutMessage', JSON.stringify(statutMessage));
-  return this.http.post<any>(this.baseUrl +'/create', formData);
+  return this.http.post<any>(`${this.baseUrl}/createStatutMessage`, formData);
 }
 
-updateUser(statutMessage: StatutMessage, id : number): Observable<any> {
+updateStatutMessage(statutMessage: StatutMessage, id : number): Observable<any> {
   const formData = new FormData();
   formData.append('statutMessage', JSON.stringify(statutMessage));
-  return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+  return this.http.put<any>(`$this.baseUrl}/updateStatutMessage/${id}`, formData);
 }
 
 
-delete(id: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteStatutMessagge(id: number): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteStatutMessagge/${id}`);
 }
 
 // deleteAll(): Observable<any> {

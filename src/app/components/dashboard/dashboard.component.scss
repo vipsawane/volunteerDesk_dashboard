@@ -1,69 +1,61 @@
-html, body {
-  height: 70%;
-  
-
-  margin: 1rem;
+/* Styles généraux pour le dashboard */
+.dashboard-container {
+  padding: 20rem; /* Espacement interne */
 }
 
-/*
-Section pour card
-*/
-
-.container {
-  width: 97%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-  margin-left: 20px;
-  flex-wrap: wrap; 
+.dashboard-header {
+  margin-bottom: 10rem; /* Espacement sous le header */
 }
 
-.item {
-  display: flex;
+/* Styles pour le conteneur des cartes */
+.dashboard-cards {
+  display: flex; /* Utiliser flexbox pour l'alignement */
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Espacement entre le contenu */
+  align-items: center; /* Alignement centré */
+  flex-wrap: wrap; /* Permettre aux cartes de passer à la ligne */
+  justify-content: space-around; /* Espacement uniforme */
+  gap: 10px; /* Espacement entre les cartes */
+}
+
+/* Styles pour chaque carte */
+.card {
+  // display: flex;
+  // flex-direction: column; /* Alignement vertical */
+  
   font-family: 'Roboto', sans-serif;
-  width: 250px;  
-  height: 150px; 
-  border-radius: 10px; 
-  padding: 10px;
+  width: 250px; /* Largeur de chaque carte */
+  height: 150px; /* Hauteur de chaque carte */
+  border-radius: 10px; /* Coins arrondis */
+  padding: 10px; /* Espacement interne */
   background-color: #fff; /* Fond blanc */
   color: #000; /* Texte en noir */
-  box-shadow: 0 1rem 3rel rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Légère ombre pour un effet de carte */
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); /* Ombre plus marquée au survol */
-  }
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Ombre */
+  transition: all 0.3s ease-in-out; /* Transition pour l'effet hover */
 }
 
+/* Effet hover pour les cartes */
+.card:hover {
+  box-shadow: 0 5rem 10rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); /* Ombre accentuée au survol */
+}
+
+/* Styles pour la première ligne dans chaque carte */
 .top-row {
-  margin-top: 10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%; 
+  align-items: center; /* Alignement centré */
+  justify-content: center; /* Alignement centré */
+  width: 100%; /* Prendre toute la largeur */
 }
 
-.monicone {
-  font-size: 40px;
-  color: #000; /* Changer l'icône en noir pour correspondre au texte */
-  margin-right: 20px; 
-}
-
-.item span {
-  font-size: 26px;
-  font-weight: bold;
-  color: #000; /* Texte en noir */
+.card span {
+  font-size: 26px; /* Taille du texte */
+  font-weight: bold; /* Texte en gras */
 }
 
 .statistique {
-  margin-top: 10px;
-  font-size: 30px;
-  font-weight: bold;
-  color: #000; /* Texte en noir */
+  margin-top: 10px; /* Espacement au-dessus de la statistique */
+  font-size: 30px; /* Taille de la statistique */
+  font-weight: bold; /* Texte en gras */
 }
 
 

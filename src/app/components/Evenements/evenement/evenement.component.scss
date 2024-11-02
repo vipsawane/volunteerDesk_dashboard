@@ -1,14 +1,117 @@
-table {
-    width: 100%;
+.container {
+  position: relative;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background-color : yellow;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.barrederecherche {
+  flex-grow: 1;
+}
+
+.button {
+  margin-left: 1rem;
+}
+
+.evenement {
+  display: flex;
+  border: solid 1px #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.left {
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+.evenement-info {
+  flex-grow: 1;
+}
+
+img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.action i {
+  cursor: pointer;
+}
+
+.date, .participants {
+  margin-top: 0.5rem;
+}
+
+.participants ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.participants li {
+  margin-bottom: 0.5rem;
+}
+
+.addform{
+  position: absolute;
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items: center;
+  margin-top: 10rem;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+
+  form{
+    width: 50%;
+    display:flex;
+    gap:10px;
+    flex-direction: column;
+    border: 1px solid;
+    // margin: 100rem;
+
   }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
+
+
+    input,textarea{
+      padding: 10px;
+      width: 100%;
+    }
+
+
+    .btns{
+      width: 100%;
+      display:flex;
+      justify-content:space-around;
+
+    }
+
+    
+  .list-group mt-4{
+    display: flex;
+    align-items:center;
   }
-  
-  td, th {
-    padding: 8px;
-    text-align: left;
-  }
-  

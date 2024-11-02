@@ -1,59 +1,78 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Observable } from 'rxjs/internal/Observable';
-import { HttpClient } from '@angular/common/http';
+import { Observable, catchError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Evenement } from '../../models/evenement';
-import { TypeEvenement } from '../../models/detailsEvenement';
-
-
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvenementService {
 
-  baseUrl : any = environment.apiURL+"/evenement";
-
+  baseUrl: string = environment.apiURL + "/evenement";
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Evenement[]> {
-    return this.http.get<Evenement[]>(this.baseUrl);
+  // Récupérer tous les événements
+  getAllEvenement(): Observable<Evenement[]> {
+    return this.http.get<Evenement[]>(`${this.baseUrl}/getAllEvenement`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  get(id: any): Observable<Evenement> {
-    return this.http.get<Evenement>(`${this.baseUrl}/${id}`);
+  // Méthode pour récupérer les événements d'un utilisateur spécifique
+  getEvenementByUser(userId: number): Observable<Evenement[]> {
+    return this.http.get<Evenement[]>(`${this.baseUrl}/user/${userId}`);
   }
 
-  createUSer(evenement: Evenement, photo:File): Observable<any>{
-    const formData = new FormData();
-    formData.append('evenement', JSON.stringify(evenement));
-    formData.append('photo', photo);
-    return this.http.post<any>(this.baseUrl +'/create', formData);
+ 
+  createEvenement(evenement : Evenement): Observable<any> {
+    return  this.http.post<any>(`${this.baseUrl}/createEvenement`, evenement); 
+  }
+  // Créer un événement
+  // createEvenement(evenement: Evenement): Observable<Evenement> {
+  //   return this.http.post<Evenement>(`${this.baseUrl}/createEvenement`, evenement).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // Mettre à jour un événement
+  updateEvenement(evenement: Evenement, idEvenement: number): Observable<Evenement> {
+    return this.http.put<Evenement>(`${this.baseUrl}/update/${idEvenement}`, evenement);
+    
   }
 
-  updateUser(evenement: Evenement, image:File, id : any): Observable<any> {
-    const formData = new FormData();
-    formData.append('evenement', JSON.stringify(evenement));
-    formData.append('image', image);
-    return this.http.put<any>(this.baseUrl +'/update/' + id, formData);
+  // Récupérer un événement par ID
+  getEvenementById(idEvenement: number): Observable<Evenement> {
+    return this.http.get<Evenement>(`${this.baseUrl}/getAllEvenementById/${idEvenement}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  getEvenementByType(idEvenement: number): Observable<Evenement> {
+    return this.http.get<Evenement>(`${this.baseUrl}/getAllEvenementById/${idEvenement}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(this.baseUrl);
+  // Supprimer un événement par ID
+  deleteEvenement(idEvenement: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/deleteEvenement/${idEvenement}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  findByLibelleEvenement(libelleEvenement: any): Observable<Evenement[]> {
-    return this.http.get<Evenement[]>(`${this.baseUrl}?libelleEvenement=${libelleEvenement}`);
+  // Gestion des erreurs
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Une erreur est survenue';
+    if (error.error instanceof ErrorEvent) {
+      // Erreur côté client
+      errorMessage = `Erreur front: ${error.error.message}`;
+    } else {
+      // Erreur côté serveur
+      errorMessage = `Erreur serveur ${error.status}: ${error.message}`;
+    }
+    return throwError(() => new Error(errorMessage));
   }
-
-  findByTypeEvenement(TypeEvenement: any): Observable<TypeEvenement[]> {
-    return this.http.get<TypeEvenement[]>(`${this.baseUrl}?TypeEvenement=${TypeEvenement}`);
-  }
-
-  
 }

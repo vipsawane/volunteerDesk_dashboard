@@ -1,57 +1,85 @@
-<mat-form-field>
-    <mat-label>Filtrer par libelle</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Daouda" #input>
-  </mat-form-field>
-  
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-  
-      <!-- ID Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let evenement"> {{evenement.id}} </td>
-      </ng-container>
-  
-      <!-- Libelle Evenement Column -->
-      <ng-container matColumnDef="libelleEvenement">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Libelle Evenement </th>
-        <td mat-cell *matCellDef="let evenement"> {{evenement.libelleEvenement}} </td>
-      </ng-container>
-  
-      <!-- Lieu Evenement Column -->
-      <ng-container matColumnDef="lieuEvenement">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lieu Evenement </th>
-        <td mat-cell *matCellDef="let evenement"> {{evenement.lieuEvenement}} </td>
-      </ng-container>
-  
-  
-      <!-- Organisateur Column -->
-      <ng-container matColumnDef="organisateur">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Organisateur </th>
-        <td mat-cell *matCellDef="let evenement"> {{evenement.organisateur}} </td>
-      </ng-container>
-
-       <!-- Email Column
-       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> E-Mail </th>
-        <td mat-cell *matCellDef="let organisation"> {{organisation.email}} </td>
-      </ng-container>
-
-       <!-- Contact Column -->
-       <!-- <ng-container matColumnDef="contact">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
-        <td mat-cell *matCellDef="let contact"> {{organisation.contact}} </td>
-      </ng-container> --> 
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-      <!-- No Data Row -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="5">Aucun evenement trouvé</td>
-      </tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[10]" aria-label="Voir plus "></mat-paginator>
+<div class="container">
+  <div class="top">
+    <input class="barrederecherche form-control" placeholder="Rechercher un événement..." />
+    <div class="button-container text-end mb-3">
+      <button class="btn btn-lg btn-outline-primary" (click)="showForm()">Ajouter</button>
+    </div>
   </div>
+
+  <!-- Liste des événements -->
+  <div class="list-group mt-4">
+    <div class="list-group-item" *ngFor="let evenement of evenementList">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              {{ evenement.libelle }}
+            </div>
+            <hr>
+            <p><strong>Type:</strong> {{ evenement.typeEvenement }}</p>
+            <p><strong>Organisateur:</strong> {{ evenement.organisateur }}</p>
+            <p><strong>Lieu:</strong> {{ evenement.lieuEvenement }}</p>
+            <p><strong>Description:</strong> {{ evenement.description }}</p>
+            <p><strong>Date:</strong> {{ evenement.dateDebutEvenement | date:'short' }} au {{ evenement.dateFinEvenement | date:'short' }}</p>
+            <div class="btn-group">
+              <button class="btn btn-secondary" (click)="editEvent(evenement)">Modifier</button>
+              <button class="btn btn-danger" (click)="onDeleteEvent(evenement.idEvenement)">Supprimer</button>
+            </div>
+          </div>
+      </div>
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire d'ajout/modification d'événement -->
+
+  <div *ngIf="isFormVisible" class="mt-4">
   
+    <h2>{{ edit ? 'Modifier' : 'Ajouter' }} un événement</h2>
+    <form [formGroup]="evenementForm" (ngSubmit)="onSubmit()">
+      
+      <div class="mb-3">
+        <label for="libelle">Libellé:</label>
+        <input type="text" formControlName="libelle" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="description">Description:</label>
+        <textarea formControlName="description" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="typeEvenement">Type d'Événement:</label>
+        <select formControlName="typeEvenement" class="form-select">
+          <option value="Activite">Activité</option>
+          <option value="Mentorat">Mentorat</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="lieuEvenement">Lieu:</label>
+        <input type="text" formControlName="lieuEvenement" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="organisateur">Organisateur:</label>
+        <input type="text" formControlName="organisateur" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="dateDebutEvenement">Date de début:</label>
+        <input type="date" formControlName="dateDebutEvenement" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="dateFinEvenement">Date de fin:</label>
+        <input type="date" formControlName="dateFinEvenement" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="nbrPoste">Nombre de postes:</label>
+        <input type="number" formControlName="nbrPoste" class="form-control" required />
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary me-2" [disabled]="!evenementForm.valid">
+          {{ edit ? 'Modifier' : 'Enregistrer' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="hideForm()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -12,11 +12,11 @@ export class NotificationService {
   baseUrl : any = environment.apiURL+"/notification";
   constructor(private http: HttpClient) {}
 
-getAll(): Observable<Notification[]> {
-  return this.http.get<Notification[]>(this.baseUrl);
+getAllNotification(): Observable<Notification[]> {
+  return this.http.get<Notification[]>(`${this.baseUrl}/getAllNotification`);
 }
 
-get(id: any): Observable<Notification> {
+getNotificationById(id: any): Observable<Notification> {
   return this.http.get<Notification>(`${this.baseUrl}/${id}`);
 }
 
@@ -24,24 +24,24 @@ findByContenuNotification(contenuNotification: any): Observable<Notification[]> 
   return this.http.get<Notification[]>(`${this.baseUrl}?contenuNotification=${contenuNotification}`);
 }
 
-create(data: any): Observable<any> {
-  return this.http.post(this.baseUrl+"/addNotification", data);
+createNotification(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/createNotification`, data);
   
 }
 
 
-update(id: any, data: any): Observable<any> {
-  return this.http.put(`${this.baseUrl+'/update'}/${id}`, data);
+updateNotification(id: any, data: any): Observable<any> {
+  return this.http.put(`${this.baseUrl}/updateNotification/${id}`, data);
 }
 
 
-delete(id: any): Observable<any> {
-  return this.http.delete(`${this.baseUrl+'/delete'}/${id}`);
+deleteNotification(id: any): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteNotification}/${id}`);
 }
 
-// deleteAll(): Observable<any> {
-//   return this.http.delete(this.baseUrl+'');
-// }
+deleteAllNotification(): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/deleteAllNotification`);
+}
 
 
 

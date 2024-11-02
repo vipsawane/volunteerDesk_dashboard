@@ -1,7 +1,7 @@
 export interface Organisation {
     idOrganisation:       number;
     numeroIdentification: string;
-    motDePasse:           string;
+    password:           string;
     raisonSocial:         string;
     logo:                 string;
     description:          string;
@@ -15,6 +15,7 @@ export interface Organisation {
     sanction:             Sanction;
     typeOrganisation:     TypeOrganisation;
     candidature:          Candidature;
+    role:                 Role;
 }
 
 export interface Candidature {

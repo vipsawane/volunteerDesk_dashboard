@@ -37,7 +37,8 @@
 //         if (this.viewMode === 'user' && (data as User)) {
 //           const user = data as User;
 //           switch (sortHeaderId) {
-//             case 'nomUser': return user.nomUser;
+//             case 'nomUser': return user.id;
+//             case 'nomUser': return user.typeUser;
 //             case 'prenomUser': return user.prenomUser;
 //             case 'email': return user.email;
 //             case 'role': return user.role;
